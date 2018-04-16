@@ -28,7 +28,7 @@ sudo yum -y install php-intl
 ```
 Restart your webserver - done.
 
-### Composer Installation
+### Composer installation
 
 ```php
 composer require joker/laravel-jalali-date
@@ -83,7 +83,7 @@ This component is developed by the following person(s) and a bunch of [awesome c
 [Aboozar Ghaffari](https://github.com/thejokercoder) |
 
 
-##Support This Project
+## Support this project
   
 [![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LXEL22GFTXTKN)
 
