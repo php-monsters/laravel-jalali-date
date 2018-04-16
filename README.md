@@ -76,11 +76,11 @@ echo Zaman::momentEn(1494334506);
 
 ## Team
 
-This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/thejockercoder/laravel-jalali-date/graphs/contributors).
+This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/thejokercoder/laravel-jalali-date/graphs/contributors).
 
-[![Aboozar Ghaffari](https://avatars2.githubusercontent.com/u/502961?v=3&s=70)](https://github.com/thejockercoder) |
+[![Aboozar Ghaffari](https://avatars2.githubusercontent.com/u/502961?v=3&s=70)](https://github.com/thejokercoder) |
 --- |
-[Aboozar Ghaffari](https://github.com/thejockercoder) |
+[Aboozar Ghaffari](https://github.com/thejokercoder) |
 
 
 ##Support This Project
