@@ -7,7 +7,7 @@
  * pattern syntax for formatting and parsing date strings.
  * (@link http://userguide.icu-project.org/formatparse/datetime)
  *
- * @copyright   Copyright 2010, Joker (https://github.com/shao-kahn/)
+ * @copyright   Copyright 2010, Joker (https://github.com/thejokercoder/)
  * @license     GNU General Public License 3.0 (http://www.gnu.org/licenses/gpl.html)
  * @package     Joker\Zaman
  * @author      Aboozar Ghaffari <aboozar.ghf@gmail.com>
