@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Shaokahn\\Zaman\\": "src/Zaman"
+            "Joker\\Zaman\\": "src/Zaman"
         }
     },
     "minimum-stability": "stable"
