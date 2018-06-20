@@ -1,5 +1,5 @@
 {
-    "name": "joker/laravel-jalali-date",
+    "name": "tartan/laravel-jalali-date",
     "description": "Laravel 5+ Jalali datetime component known as ZAMAN",
     "keywords": ["datetime", "laravel", "jalali", "shamsi", "hijri", "jDatetime", "Gregorian", "moment"],
     "type": "library",
