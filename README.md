@@ -31,7 +31,7 @@ Restart your webserver - done.
 ### Composer installation
 
 ```php
-composer require joker/laravel-jalali-date
+composer require tartan/laravel-jalali-date
 ```
 
 ### Integration with Laravel 5.*
@@ -40,7 +40,7 @@ Add Zaman to app aliases in config/app.php file
 
 ```php
 // aliases
-'Zaman' => Joker\Facades\Zaman::class,
+'Zaman' => Tartan\Zaman\Facades\Zaman::class,
 ```
 
 ### Usage samples
@@ -76,9 +76,9 @@ echo Zaman::momentEn(1494334506);
 
 ## Team
 
-This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/thejokercoder/laravel-jalali-date/graphs/contributors).
+This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/iamtartan/laravel-jalali-date/graphs/contributors).
 
-[![Aboozar Ghaffari](https://avatars1.githubusercontent.com/u/35990482?s=200&v=4)](https://github.com/thejokercoder) |
+[![Aboozar Ghaffari](https://avatars1.githubusercontent.com/u/502961?s=130&v=4)](https://github.com/iamtartan) |
 --- |
 [Aboozar Ghaffari](https://github.com/thejokercoder) |
 

@@ -7,13 +7,13 @@
  * pattern syntax for formatting and parsing date strings.
  * (@link http://userguide.icu-project.org/formatparse/datetime)
  *
- * @copyright   Copyright 2010, Joker (https://github.com/thejokercoder/)
+ * @copyright   Copyright 2010, Tartan (https://github.com/iamtartan/)
  * @license     GNU General Public License 3.0 (http://www.gnu.org/licenses/gpl.html)
- * @package     Joker\Zaman
+ * @package     Tartan\Zaman
  * @author      Aboozar Ghaffari <aboozar.ghf@gmail.com>
  */
 
-namespace Joker\Zaman;
+namespace Tartan\Zaman;
 
 use NumberFormatter;
 use DateTime;

@@ -1,12 +1,12 @@
 <?php
 
-namespace Joker\Zaman\Facades;
+namespace Tartan\Zaman\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * Class Zaman
- * @package Joker\Zaman
+ * @package Tartan\Zaman
  * @author  Aboozar Ghaffari <aboozar.ghf@gmail.com>
  */
 class Zaman extends Facade
@@ -18,6 +18,6 @@ class Zaman extends Facade
      */
     protected static function getFacadeAccessor ()
     {
-        return 'Joker\Zaman\Helpers\PersianDateHelper';
+        return 'Tartan\Zaman\Helpers\PersianDateHelper';
     }
 }

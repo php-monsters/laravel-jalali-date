@@ -1,12 +1,12 @@
 <?php
 
-namespace Joker\Zaman\Helpers;
+namespace Tartan\Zaman\Helpers;
 
-use Joker\Zaman\IntlDatetime;
+use Tartan\Zaman\IntlDatetime;
 
 /**
  * Class PersianDateHelper
- * @package Joker\Zaman
+ * @package Tartan\Zaman
  * @author  Aboozar Ghaffari <aboozar.ghf@gmail.com>
  */
 class PersianDateHelper
