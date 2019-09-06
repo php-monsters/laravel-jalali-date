@@ -13,7 +13,7 @@
     "require": {
         "php": ">=5.4.0",
         "ext-intl": "*",
-        "illuminate/support": "5.x.x"
+        "illuminate/support": ">=5.0.0"
     },
     "autoload": {
         "psr-4": {
