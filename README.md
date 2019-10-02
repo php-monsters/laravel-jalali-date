@@ -80,7 +80,7 @@ This component is developed by the following person(s) and a bunch of [awesome c
 
 [![Aboozar Ghaffari](https://avatars1.githubusercontent.com/u/502961?s=130&v=4)](https://github.com/iamtartan) |
 --- |
-[Aboozar Ghaffari](https://github.com/thejokercoder) |
+[Aboozar Ghaffari](https://github.com/iamtartan) |
 
 
 ## Support this project
