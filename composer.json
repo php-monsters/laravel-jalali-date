@@ -11,9 +11,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=8.0.0",
         "ext-intl": "*",
-        "illuminate/support": ">=5.0.0"
+        "illuminate/support": ">=8.0.0",
+        "ext-ctype": "*"
     },
     "autoload": {
         "psr-4": {
