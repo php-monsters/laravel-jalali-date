@@ -60,10 +60,10 @@ echo Zaman::gToj('2014-09-21 07:12:54', 'EEEE yyyy/MMMM/dd H:m:s');
 
 
 // Moment samples
-echo Zaman::moment(1494328806);
-echo Zaman::moment(strtotime('3 hours ago'));
-echo Zaman::moment(strtotime('2017-01-02 00:10:20'));
-echo Zaman::momentEn(1494334506);
+echo Zaman::moment(1494328806); // "May 2017"
+echo Zaman::moment(strtotime('3 hours ago')); // "3 ساعت قبل"
+echo Zaman::moment(strtotime('2017-01-02 00:10:20')); // "2 هفته قبل"
+echo Zaman::momentEn(1494334506); // "last month"
 
 // Blade usage example
 {{ Zaman::gToj('2011-11-20 19:12:19') }}
