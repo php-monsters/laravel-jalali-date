@@ -47,8 +47,7 @@ Add Zaman to app aliases in config/app.php file
 
 ```php
 
-// Jalali to Gregraian sample
-
+// Jalali to Gregraian samples
 echo Zaman::jTog('next week');
 echo Zaman::jTog('now');
 echo Zaman::jTog('1396-06-30 05:30:10');
@@ -60,19 +59,19 @@ echo Zaman::gToj('2010-10-24 22:50:14');
 echo Zaman::gToj('2014-09-21 07:12:54', 'EEEE yyyy/MMMM/dd H:m:s');
 
 
-// moment samples
-echo Zaman::moment(1494328806);
-echo Zaman::moment(strtotime('3 hours ago'));
-echo Zaman::moment(strtotime('2017-01-02 00:10:20'));
-echo Zaman::momentEn(1494334506);
+// Moment samples
+echo Zaman::moment(1494328806); // "May 2017"
+echo Zaman::moment(strtotime('3 hours ago')); // "3 ساعت قبل"
+echo Zaman::moment(strtotime('2017-01-02 00:10:20')); // "2 هفته قبل"
+echo Zaman::momentEn(1494334506); // "last month"
 
-//in blader
+// Blade usage example
 {{ Zaman::gToj('2011-11-20 19:12:19') }}
 
 ```
 
 ### Date/Time formats
-[Supported format documentation](http://userguide.icu-project.org/formatparse/datetime)
+[Supported Formats Documentation](http://userguide.icu-project.org/formatparse/datetime)
 
 ## Team
 
@@ -85,7 +84,7 @@ This component is developed by the following person(s) and a bunch of [awesome c
 
 ## Support this project
   
-[![Donate via Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=LXEL22GFTXTKN)
+Please support the package by giving it :star: and contributing to its development.
 
 ## License
 
