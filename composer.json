@@ -1,25 +1,34 @@
 {
-    "name": "tartan/laravel-jalali-date",
-    "description": "Laravel 5+ Jalali datetime component known as ZAMAN",
-    "keywords": ["datetime", "laravel", "jalali", "shamsi", "hijri", "jDatetime", "Gregorian", "moment"],
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Aboozar Ghaffari",
-            "email": "aboozar.ghf@gmail.com"
-        }
-    ],
-    "require": {
-        "php": ">=8.0.0",
-        "ext-intl": "*",
-        "illuminate/support": ">=8.0.0",
-        "ext-ctype": "*"
-    },
-    "autoload": {
-        "psr-4": {
-            "Tartan\\Zaman\\": "src/Zaman"
-        }
-    },
-    "minimum-stability": "stable"
+  "name": "php-monsters/laravel-jalali-date",
+  "description": "Laravel Jalali datetime component known as ZAMAN",
+  "keywords": [
+    "datetime",
+    "laravel",
+    "jalali",
+    "shamsi",
+    "hijri",
+    "jDatetime",
+    "Gregorian",
+    "moment"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Aboozar Ghaffari",
+      "email": "aboozar.ghf@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.1",
+      "ext-ctype": "*",
+      "ext-intl": "*",
+      "illuminate/support": ">=8.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpMonsters\\Zaman\\": "src/Zaman"
+    }
+  },
+  "minimum-stability": "stable"
 }

@@ -3,7 +3,7 @@ This component based on PHP International (php-intl) extension so php-intl exten
 
 known as:
 
-- Hijri Shami
+- Hijri Shamsi
 - Jalali Date
 - JDatetime
 - هجری شمسی
@@ -31,7 +31,7 @@ Restart your webserver - done.
 ### Composer installation
 
 ```php
-composer require tartan/laravel-jalali-date
+composer require php-monsters/laravel-jalali-date
 ```
 
 ### Integration with Laravel 5.*
@@ -40,7 +40,7 @@ Add Zaman to app aliases in config/app.php file
 
 ```php
 // aliases
-'Zaman' => Tartan\Zaman\Facades\Zaman::class,
+'Zaman' => PhpMonsters\Zaman\Facades\Zaman::class,
 ```
 
 ### Usage samples
@@ -60,9 +60,9 @@ echo Zaman::gToj('2014-09-21 07:12:54', 'EEEE yyyy/MMMM/dd H:m:s');
 
 
 // Moment samples
-echo Zaman::moment(1494328806); // "May 2017"
 echo Zaman::moment(strtotime('3 hours ago')); // "3 ساعت قبل"
 echo Zaman::moment(strtotime('2017-01-02 00:10:20')); // "2 هفته قبل"
+echo Zaman::momentEn(1494328806); // "May 2017"
 echo Zaman::momentEn(1494334506); // "last month"
 
 // Blade usage example
@@ -75,11 +75,11 @@ echo Zaman::momentEn(1494334506); // "last month"
 
 ## Team
 
-This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/iamtartan/laravel-jalali-date/graphs/contributors).
+This component is developed by the following person(s) and a bunch of [awesome contributors](https://github.com/php-monsters/laravel-jalali-date/graphs/contributors).
 
-[![Aboozar Ghaffari](https://avatars1.githubusercontent.com/u/502961?s=130&v=4)](https://github.com/iamtartan) |
+[![Aboozar Ghaffari](https://avatars1.githubusercontent.com/u/502961?s=130&v=4)](https://github.com/samuraee) |
 --- |
-[Aboozar Ghaffari](https://github.com/iamtartan) |
+[Aboozar Ghaffari](https://github.com/samuraee) |
 
 
 ## Support this project
