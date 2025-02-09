@@ -30,5 +30,12 @@
       "PhpMonsters\\Zaman\\": "src/Zaman"
     }
   },
+  "extra": {
+      "laravel": {
+          "aliases": {
+              "Zaman": "PhpMonsters\Zaman\Facades\Zaman"
+          }
+      }
+  },
   "minimum-stability": "stable"
 }
