@@ -33,7 +33,7 @@
   "extra": {
       "laravel": {
           "aliases": {
-              "Zaman": "PhpMonsters\Zaman\Facades\Zaman"
+              "Zaman": "PhpMonsters\\Zaman\\Facades\\Zaman"
           }
       }
   },
