@@ -38,11 +38,11 @@ class IntlDatetime extends DateTime
     /**
      * Creates a new instance of IntlDateTime
      *
-     * @param  mixed  $time  Unix timestamp or strtotime() compatible string or another DateTime object
-     * @param  mixed  $timezone  DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
-     * @param  string  $calendar  any calendar supported by ICU (e.g. gregorian, persian, islamic, ...)
-     * @param  string  $locale  any locale supported by ICU
-     * @param  string|null  $pattern  the date pattern in which $time is formatted.
+     * @param mixed $time Unix timestamp or strtotime() compatible string or another DateTime object
+     * @param mixed $timezone DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
+     * @param string $calendar any calendar supported by ICU (e.g. gregorian, persian, islamic, ...)
+     * @param string $locale any locale supported by ICU
+     * @param string|null $pattern the date pattern in which $time is formatted.
      *
      * @return void
      * @throws Exception
@@ -52,11 +52,12 @@ class IntlDatetime extends DateTime
         $timezone = null,
         string $calendar = 'gregorian',
         string $locale = 'en_US',
-        string $pattern = null
-    ) {
+        ?string $pattern = null
+    )
+    {
         if (!isset($timezone)) {
             $timezone = new DateTimeZone(date_default_timezone_get());
-        } elseif (!$timezone instanceof \DateTimeZone) {
+        } elseif (!$timezone instanceof DateTimeZone) {
             $timezone = new DateTimeZone($timezone);
         }
 
@@ -71,16 +72,16 @@ class IntlDatetime extends DateTime
     /**
      * Alters object's internal timestamp with a string acceptable by strtotime() or a Unix timestamp or a DateTime object.
      *
-     * @param  mixed  $time  Unix timestamp or strtotime() compatible string or another DateTime object
-     * @param  mixed|null  $timezone  DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
-     * @param  string|null  $pattern  the date pattern in which $time is formatted.
+     * @param mixed $time Unix timestamp or strtotime() compatible string or another DateTime object
+     * @param mixed|null $timezone DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
+     * @param string|null $pattern the date pattern in which $time is formatted.
      *
      * @return IntlDateTime The modified DateTime.
      * @throws Exception
      */
-    public function set(mixed $time, mixed $timezone = null, string $pattern = null): static
+    public function set(mixed $time, mixed $timezone = null, ?string $pattern = null): static
     {
-        if ($time instanceof \DateTime) {
+        if ($time instanceof DateTime) {
             $time = $time->format('U');
         } elseif (!is_numeric($time) || $pattern) {
             if (!$pattern) {
@@ -104,7 +105,7 @@ class IntlDatetime extends DateTime
             }
 
             $timezone = empty($timezone) ? $this->getTimezone() : $timezone;
-            if ($timezone instanceof \DateTimeZone) {
+            if ($timezone instanceof DateTimeZone) {
                 $timezone = $timezone->getName();
             }
             $defaultTimezone = @date_default_timezone_get();
@@ -128,8 +129,8 @@ class IntlDatetime extends DateTime
     /**
      * Returns date formatted according to given pattern.
      *
-     * @param  string  $format  Date pattern in ICU syntax (@link http://userguide.icu-project.org/formatparse/datetime)
-     * @param  mixed|null  $timezone  DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
+     * @param string $format Date pattern in ICU syntax (@link http://userguide.icu-project.org/formatparse/datetime)
+     * @param mixed|null $timezone DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
      *
      * @return string Formatted date on success or FALSE on failure.
      * @throws Exception
@@ -144,7 +145,7 @@ class IntlDatetime extends DateTime
         // Timezones DST data in ICU are not as accurate as PHP.
         // So we get timezone offset from php and pass it to ICU.
         $result = $this->getFormatter(array(
-            'timezone' => 'GMT'.(parent::format('Z') ? parent::format('P') : ''),
+            'timezone' => 'GMT' . (parent::format('Z') ? parent::format('P') : ''),
             'pattern' => $format
         ))->format($this->getTimestamp());
 
@@ -158,14 +159,14 @@ class IntlDatetime extends DateTime
     /**
      * Sets the timezone for the object.
      *
-     * @param  mixed  $timezone  DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
+     * @param mixed $timezone DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
      *
      * @return IntlDateTime The modified DateTime.
      * @throws Exception
      */
     #[ReturnTypeWillChange] public function setTimezone($timezone): static
     {
-        if (!$timezone instanceof \DateTimeZone) {
+        if (!$timezone instanceof DateTimeZone) {
             $timezone = new DateTimeZone($timezone);
         }
         parent::setTimezone($timezone);
@@ -176,7 +177,7 @@ class IntlDatetime extends DateTime
     /**
      * Returns an instance of IntlDateFormatter with specified options.
      *
-     * @param  array  $options
+     * @param array $options
      *
      * @return IntlDateFormatter
      */
@@ -185,12 +186,12 @@ class IntlDatetime extends DateTime
         $locale = empty($options['locale']) ? $this->locale : $options['locale'];
         $calendar = empty($options['calendar']) ? $this->calendar : $options['calendar'];
         $timezone = empty($options['timezone']) ? $this->getTimezone() : $options['timezone'];
-        if ($timezone instanceof \DateTimeZone) {
+        if ($timezone instanceof DateTimeZone) {
             $timezone = $timezone->getName();
         }
         $pattern = empty($options['pattern']) ? null : $options['pattern'];
 
-        return new IntlDateFormatter($locale.'@calendar='.$calendar,
+        return new IntlDateFormatter($locale . '@calendar=' . $calendar,
             IntlDateFormatter::FULL, IntlDateFormatter::FULL, $timezone,
             $calendar === 'gregorian' ? IntlDateFormatter::GREGORIAN : IntlDateFormatter::TRADITIONAL, $pattern);
     }
@@ -208,7 +209,7 @@ class IntlDatetime extends DateTime
     /**
      * Tries to guess the date pattern in which $time is formatted.
      *
-     * @param  string  $time  The date string
+     * @param string $time The date string
      *
      * @return bool|string Detected ICU pattern on success, FALSE otherwise.
      */
@@ -224,13 +225,13 @@ class IntlDatetime extends DateTime
             if (!empty($match[1])) {
                 $separator = $match[2];
                 $pattern = strlen($match[1]) === 2 ? 'yy' : 'yyyy';
-                $pattern .= $separator.'MM'.$separator.'dd';
+                $pattern .= $separator . 'MM' . $separator . 'dd';
             } else {
                 $separator = $match[4];
-                $pattern = 'dd'.$separator.'LLL'.$separator;
+                $pattern = 'dd' . $separator . 'LLL' . $separator;
                 $pattern .= strlen($match[5]) === 2 ? 'yy' : 'yyyy';
                 if (!empty($match[3])) {
-                    $pattern = (preg_match('/,\s+$/', $match[3]) ? 'E, ' : 'E ').$pattern;
+                    $pattern = (preg_match('/,\s+$/', $match[3]) ? 'E, ' : 'E ') . $pattern;
                 }
             }
             if (!empty($match[6])) {
@@ -252,7 +253,7 @@ class IntlDatetime extends DateTime
     /**
      * Replaces localized digits in $str with latin digits.
      *
-     * @param  string  $str
+     * @param string $str
      *
      * @return string Platinized string
      */
@@ -273,7 +274,7 @@ class IntlDatetime extends DateTime
     /**
      * Overrides the setTimestamp method to support timestamps out of the integer range.
      *
-     * @param  float  $timestamp  Unix timestamp representing the date.
+     * @param float $timestamp Unix timestamp representing the date.
      *
      * @return IntlDateTime the modified DateTime.
      * @throws Exception
@@ -294,7 +295,7 @@ class IntlDatetime extends DateTime
     /**
      * Alter the timestamp by incrementing or decrementing in a format accepted by strtotime().
      *
-     * @param  string  $modifier  a string in a relative format accepted by strtotime().
+     * @param string $modifier a string in a relative format accepted by strtotime().
      *
      * @return IntlDateTime The modified DateTime.
      */
@@ -323,7 +324,7 @@ class IntlDatetime extends DateTime
     /**
      * Sets the locale used by the object.
      *
-     * @param  string  $locale
+     * @param string $locale
      *
      * @return IntlDateTime The modified DateTime.
      */
@@ -347,7 +348,7 @@ class IntlDatetime extends DateTime
     /**
      * Sets the calendar used by the object.
      *
-     * @param  string  $calendar
+     * @param string $calendar
      *
      * @return IntlDateTime The modified DateTime.
      */
@@ -361,8 +362,8 @@ class IntlDatetime extends DateTime
     /**
      * Preserve original DateTime::format functionality
      *
-     * @param  string  $format  Format accepted by date().
-     * @param  mixed|null  $timezone  DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
+     * @param string $format Format accepted by date().
+     * @param mixed|null $timezone DateTimeZone object or timezone identifier as full name (e.g. Asia/Tehran) or abbreviation (e.g. IRDT).
      *
      * @return string Formatted date on success or FALSE on failure.
      * @throws Exception
@@ -396,7 +397,7 @@ class IntlDatetime extends DateTime
     /**
      * Internally used by modify method to calculate calendar-aware modifications
      *
-     * @param  array  $matches
+     * @param array $matches
      *
      * @return string An empty string
      * @throws Exception
@@ -447,16 +448,16 @@ class IntlDatetime extends DateTime
     /**
      * Resets the current date of the object.
      *
-     * @param  integer  $year
-     * @param  integer  $month
-     * @param  integer  $day
+     * @param integer $year
+     * @param integer $month
+     * @param integer $day
      *
      * @return IntlDateTime The modified DateTime.
      * @throws Exception
      */
     #[ReturnTypeWillChange] public function setDate(int $year, int $month, int $day): static
     {
-        $this->set("$year/$month/$day ".$this->format('HH:mm:ss'), null, 'yyyy/MM/dd HH:mm:ss');
+        $this->set("$year/$month/$day " . $this->format('HH:mm:ss'), null, 'yyyy/MM/dd HH:mm:ss');
 
         return $this;
     }

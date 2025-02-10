@@ -1,5 +1,6 @@
-# ZAMAN - Laravel 5+ Jalali datetime component:
-This component based on PHP International (php-intl) extension so php-intl extension must be installed on your web server. 
+# ZAMAN - Jalali datetime component for Laravel:
+This component is based on native PHP International (php-intl) extension,
+So php-intl extension must be installed on your server. 
 
 known as:
 
@@ -9,6 +10,8 @@ known as:
 - هجری شمسی
 - تقویم خورشیدی
 - تاریخ شمسی
+
+Supprts Laravel 5+ and PHP 8.1+
 
 ## php-intl extension installation
 
@@ -24,7 +27,7 @@ sudo apt-get install php-intl
 
 - Redhat based Linux (Redhat/Centos/ ...)
 ```
-sudo yum -y install php-intl
+sudo dnf -y install php-intl
 ```
 Restart your webserver - done.
 
@@ -36,7 +39,7 @@ composer require php-monsters/laravel-jalali-date
 
 ### Integration with Laravel 5.*
 
-Add Zaman to app aliases in config/app.php file
+Add package alias to your app aliases (only for Laravel < 5.5):
 
 ```php
 // aliases
@@ -47,7 +50,7 @@ Add Zaman to app aliases in config/app.php file
 
 ```php
 
-// Jalali to Gregraian samples
+// Jalali to Gregorian samples
 echo Zaman::jTog('next week');
 echo Zaman::jTog('now');
 echo Zaman::jTog('1396-06-30 05:30:10');
@@ -58,12 +61,23 @@ echo Zaman::gToj('2 days ago');
 echo Zaman::gToj('2010-10-24 22:50:14');
 echo Zaman::gToj('2014-09-21 07:12:54', 'EEEE yyyy/MMMM/dd H:m:s');
 
-
 // Moment samples
-echo Zaman::moment(strtotime('3 hours ago')); // "3 ساعت قبل"
-echo Zaman::moment(strtotime('2017-01-02 00:10:20')); // "2 هفته قبل"
-echo Zaman::momentEn(1494328806); // "May 2017"
-echo Zaman::momentEn(1494334506); // "last month"
+// JALALI moment
+echo Zaman::moment(strtotime('3 hours ago'), Zaman::CAL_JALALI); // "3 ساعت قبل"
+echo Zaman::momentJalali(strtotime('3 hours ago')); // "3 ساعت قبل"
+echo Zaman::moment(strtotime('2017-01-02 00:10:20'), Zaman::CAL_JALALI); // "2 هفته قبل"
+echo Zaman::momentJalali(strtotime('2017-01-02 00:10:20')); // "2 هفته قبل"
+
+// GREGORIAN moment
+echo Zaman::moment('now', Zaman::CAL_GREGORIAN); // "May 2017"
+echo Zaman::momentGregorian(1494328806); // "May 2017"
+echo Zaman::moment('1 month ago', Zaman::CAL_GREGORIAN); // "last month"
+echo Zaman::momentGregorian(1494334506); // "last month"
+
+// HIJRI moment
+// ISN'T implemented yet!!!
+// echo Zaman::moment('now', Zaman::CAL_HIJRI);
+// echo Zaman::momentHijri(1494328806);
 
 // Blade usage example
 {{ Zaman::gToj('2011-11-20 19:12:19') }}

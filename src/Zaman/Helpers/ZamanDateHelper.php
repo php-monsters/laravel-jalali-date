@@ -3,32 +3,35 @@
 namespace PhpMonsters\Zaman\Helpers;
 
 use Exception;
+use PhpMonsters\Zaman\Facades\Zaman;
 use PhpMonsters\Zaman\IntlDatetime;
+use RuntimeException;
 
 /**
  * Class PersianDateHelper
  * @package PhpMonsters\Zaman
  * @author  Aboozar Ghaffari <aboozar.ghf@gmail.com>
  */
-class PersianDateHelper
+class ZamanDateHelper
 {
     /**
      * Gregorian to Jalali
      *
-     * @param  string  $date
-     * @param  string  $format
-     * @param  string  $locale
-     * @param  string|null  $timezone
+     * @param string $date
+     * @param string $format
+     * @param string $locale
+     * @param string|null $timezone
      * @return string
      * @throws Exception
      * @link http://userguide.icu-project.org/formatparse/datetime
      */
     public function gToj(
-        mixed $date,
-        string $format = 'yyyy/MM/dd H:m:s',
-        string $locale = 'fa',
-        string $timezone = null
-    ): string {
+        mixed   $date,
+        string  $format = 'yyyy/MM/dd H:m:s',
+        string  $locale = 'fa',
+        ?string $timezone = null
+    ): string
+    {
         $date = new IntlDatetime($date, $timezone, 'gregorian');
         $date->setCalendar('persian');
         $date->setLocale($locale);
@@ -39,11 +42,11 @@ class PersianDateHelper
     /**
      * Jalali to Gregorian
      *
-     * @param  mixed  $date
-     * @param  string  $format
-     * @param  string  $inputLocale
-     * @param  string  $locale
-     * @param  string  $timezone
+     * @param mixed $date
+     * @param string $format
+     * @param string $inputLocale
+     * @param string $locale
+     * @param string $timezone
      * @return string
      * @throws Exception
      * @link http://userguide.icu-project.org/formatparse/datetime
@@ -54,7 +57,8 @@ class PersianDateHelper
         string $inputLocale = 'fa',
         string $locale = 'en',
         string $timezone = 'Asia/Tehran'
-    ): string {
+    ): string
+    {
         $date = new IntlDatetime($date, $timezone, 'persian', $inputLocale);
 
         $date->setCalendar('Gregorian');
@@ -64,11 +68,25 @@ class PersianDateHelper
     }
 
     /**
-     * @param  string  $timestamp  timestamp
+     * @param string $timestamp timestamp
+     * @param int $calendar
+     * @return string
+     */
+    public function moment(string $timestamp, int $calendar): string
+    {
+        return match ($calendar) {
+            Zaman::CAL_JALALI => $this->momentJalali($timestamp),
+            Zaman::CAL_HIJRI => $this->momentHijri($timestamp),
+            default => $this->momentGregorian($timestamp),
+        };
+    }
+
+    /**
+     * @param string $timestamp timestamp
      *
      * @return string
      */
-    public function moment(string $timestamp): string
+    public function momentJalali(string $timestamp): string
     {
         if (!ctype_digit($timestamp)) {
             $timestamp = strtotime($timestamp);
@@ -78,7 +96,7 @@ class PersianDateHelper
             return 'اکنون';
         }
 
-        $dayDiff = (int) floor($diff / 86400);
+        $dayDiff = (int)floor($diff / 86400);
 
         if ($diff > 0) {
             if ($dayDiff === 0) {
@@ -89,23 +107,23 @@ class PersianDateHelper
                     return 'یک دقیقه قبل';
                 }
                 if ($diff < 3600) {
-                    return floor($diff / 60).' دقیقه قبل';
+                    return floor($diff / 60) . ' دقیقه قبل';
                 }
                 if ($diff < 7200) {
                     return 'یک ساعت پیش';
                 }
                 if ($diff < 86400) {
-                    return floor($diff / 3600).' ساعت قبل';
+                    return floor($diff / 3600) . ' ساعت قبل';
                 }
             }
             if ($dayDiff === 1) {
                 return 'دیروز';
             }
             if ($dayDiff < 7) {
-                return $dayDiff.' روز قبل';
+                return $dayDiff . ' روز قبل';
             }
             if ($dayDiff < 31) {
-                return ceil($dayDiff / 7).' هفته قبل';
+                return ceil($dayDiff / 7) . ' هفته قبل';
             }
             if ($dayDiff < 60) {
                 return 'ماه گذشته';
@@ -120,13 +138,13 @@ class PersianDateHelper
                 return 'یک دقیقه پیش';
             }
             if ($diff < 3600) {
-                return floor($diff / 60).' دقیقه پیش';
+                return floor($diff / 60) . ' دقیقه پیش';
             }
             if ($diff < 7200) {
                 return 'یک ساعت پیش';
             }
             if ($diff < 86400) {
-                return floor($diff / 3600).' ساعت پیش';
+                return floor($diff / 3600) . ' ساعت پیش';
             }
         }
         if ($dayDiff === 1) {
@@ -139,9 +157,9 @@ class PersianDateHelper
             return 'هفته بعد';
         }
         if (ceil($dayDiff / 7) < 4) {
-            return 'در '.ceil($dayDiff / 7).' هفته';
+            return 'در ' . ceil($dayDiff / 7) . ' هفته';
         }
-        if ((int) date('n', $timestamp) === (int) date('n') + 1) {
+        if ((int)date('n', $timestamp) === (int)date('n') + 1) {
             return 'ماه بعد';
         }
 
@@ -149,11 +167,11 @@ class PersianDateHelper
     }
 
     /**
-     * @param  string  $timestamp  timestamp
+     * @param string $timestamp timestamp
      *
-     * @return false|string
+     * @return string
      */
-    public function momentEn(string $timestamp): bool|string
+    public function momentGregorian(string $timestamp): string
     {
         if (!ctype_digit($timestamp)) {
             $timestamp = strtotime($timestamp);
@@ -163,7 +181,7 @@ class PersianDateHelper
             return 'now';
         }
 
-        $dayDiff = (int) floor($diff / 86400);
+        $dayDiff = (int)floor($diff / 86400);
 
         if ($diff > 0) {
             if ($dayDiff === 0) {
@@ -174,23 +192,23 @@ class PersianDateHelper
                     return '1 minute ago';
                 }
                 if ($diff < 3600) {
-                    return floor($diff / 60).' minutes ago';
+                    return floor($diff / 60) . ' minutes ago';
                 }
                 if ($diff < 7200) {
                     return '1 hour ago';
                 }
                 if ($diff < 86400) {
-                    return floor($diff / 3600).' hours ago';
+                    return floor($diff / 3600) . ' hours ago';
                 }
             }
             if ($dayDiff === 1) {
                 return 'Yesterday';
             }
             if ($dayDiff < 7) {
-                return $dayDiff.' days ago';
+                return $dayDiff . ' days ago';
             }
             if ($dayDiff < 31) {
-                return ceil($dayDiff / 7).' weeks ago';
+                return ceil($dayDiff / 7) . ' weeks ago';
             }
             if ($dayDiff < 60) {
                 return 'last month';
@@ -205,13 +223,13 @@ class PersianDateHelper
                 return 'in a minute';
             }
             if ($diff < 3600) {
-                return 'in '.floor($diff / 60).' minutes';
+                return 'in ' . floor($diff / 60) . ' minutes';
             }
             if ($diff < 7200) {
                 return 'in an hour';
             }
             if ($diff < 86400) {
-                return 'in '.floor($diff / 3600).' hours';
+                return 'in ' . floor($diff / 3600) . ' hours';
             }
         }
         if ($dayDiff === 1) {
@@ -224,12 +242,22 @@ class PersianDateHelper
             return 'next week';
         }
         if (ceil($dayDiff / 7) < 4) {
-            return 'in '.ceil($dayDiff / 7).' weeks';
+            return 'in ' . ceil($dayDiff / 7) . ' weeks';
         }
-        if ((int) date('n', $timestamp) === (int) date('n') + 1) {
+        if ((int)date('n', $timestamp) === (int)date('n') + 1) {
             return 'next month';
         }
 
         return date('F Y', $timestamp);
+    }
+
+    /**
+     * @param string $timestamp timestamp
+     *
+     * @return string
+     */
+    private function momentHijri(string $timestamp): string
+    {
+        throw new RuntimeException('Hijri moment has not implemented yet!');
     }
 }
